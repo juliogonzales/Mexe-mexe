@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -47,7 +47,7 @@ header{display:flex;align-items:center;gap:8px;padding:7px 10px;background:linea
 .bot strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.72rem}
 .bot .cnt{color:var(--muted)}
 .bot small{display:block;color:#ffffff88;font-size:.6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:.75rem}
-.table-wrap{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 8px 8px;-webkit-overflow-scrolling:touch}
+.table-wrap{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 8px 8px;-webkit-overflow-scrolling:touch;touch-action:pan-y}
 .table-title{text-align:center;font-size:.64rem;letter-spacing:.8px;color:var(--muted);margin:2px 0 6px}
 .table-area{min-height:calc(100% - 22px);display:flex;align-content:flex-start;align-items:flex-start;gap:16px 8px;flex-wrap:wrap;padding:14px 8px 8px;border:2px dashed #ffffff1c;border-radius:14px;background:#0000001a}
 .drop-valid{border-color:var(--green)!important;background:#3ddc8426!important}
@@ -1054,11 +1054,11 @@ document.addEventListener('pointermove',e=>{
  if (tw) {
   const rect = tw.getBoundingClientRect();
   const yPos = e.clientY;
-  const threshold = 50; // pixels de proximidade da borda
+  const threshold = 60;
   if (yPos < rect.top + threshold) {
-   tw.scrollTop -= 8; // Rola para cima
+   tw.scrollTop -= 12; // Rola para cima mais rápido
   } else if (yPos > rect.bottom - threshold) {
-   tw.scrollTop += 8; // Rola para baixo
+   tw.scrollTop += 12; // Rola para baixo
   }
  }
 });
