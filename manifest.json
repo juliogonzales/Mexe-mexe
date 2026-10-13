@@ -1,0 +1,15 @@
+{
+  "name": "Mexe-Mexe",
+  "short_name": "MexeMexe",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07170e",
+  "theme_color": "#071b10",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/512.png?text=Mexe+Mexe",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
