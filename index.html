@@ -16,8 +16,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 input,select{user-select:text;-webkit-user-select:text;-webkit-touch-callout:default}
-html{background:#030c07;overscroll-behavior:none;overscroll-behavior-y:none;touch-action:none}
-body{height:100vh;height:100dvh;max-width:860px;margin:0 auto;overflow:hidden;display:flex;flex-direction:column;background:var(--bg);color:var(--text);
+html{background:#030c07;overscroll-behavior:none;overscroll-behavior-y:none;touch-action:none;height:calc(100% + 3px)}
+body{height:calc(100vh + 2px);height:calc(100dvh + 2px);max-width:860px;margin:0 auto;overflow:hidden;display:flex;flex-direction:column;background:var(--bg);color:var(--text);
  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overscroll-behavior:none;overscroll-behavior-y:none;padding-top:var(--safe-t);touch-action:none}
 button{font-family:inherit}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
@@ -1112,6 +1112,14 @@ document.addEventListener('pointercancel',e=>{if(drag&&e.pointerId===drag.pid)en
 
 document.addEventListener('dragstart',e=>e.preventDefault());
 
+
+/* Anti "puxar para atualizar" do WebView nativo: mantém a página 2px rolada, assim o Android entende que não está no topo */
+(function(){
+ const lock=()=>{try{if((window.scrollY||0)<2)window.scrollTo(0,2)}catch(e){}};
+ ['scroll','resize','orientationchange','pageshow','focus','touchend'].forEach(ev=>window.addEventListener(ev,lock,{passive:true}));
+ document.addEventListener('visibilitychange',lock);
+ lock();setTimeout(lock,300);setTimeout(lock,1500);setInterval(lock,2000);
+})();
 /* ---------- início ---------- */
 $('nameIn').value=state.name;
 toMenu();
