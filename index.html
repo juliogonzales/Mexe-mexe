@@ -17,9 +17,9 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 input,select{user-select:text;-webkit-user-select:text;-webkit-touch-callout:default}
-html{background:#030c07;overscroll-behavior:none}
+html{background:#030c07;overscroll-behavior:none;overscroll-behavior-y:none}
 body{height:100vh;height:100dvh;max-width:860px;margin:0 auto;overflow:hidden;display:flex;flex-direction:column;background:var(--bg);color:var(--text);
- font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overscroll-behavior:none;padding-top:var(--safe-t)}
+ font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overscroll-behavior:none;overscroll-behavior-y:none;padding-top:var(--safe-t)}
 button{font-family:inherit}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
@@ -47,7 +47,7 @@ header{display:flex;align-items:center;gap:8px;padding:7px 10px;background:linea
 .bot strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.72rem}
 .bot .cnt{color:var(--muted)}
 .bot small{display:block;color:#ffffff88;font-size:.6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:.75rem}
-.table-wrap{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 8px 8px;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+.table-wrap{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 8px 8px;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain}
 .table-title{text-align:center;font-size:.64rem;letter-spacing:.8px;color:var(--muted);margin:2px 0 6px}
 .table-area{min-height:calc(100% - 22px);display:flex;align-content:flex-start;align-items:flex-start;gap:16px 8px;flex-wrap:wrap;padding:14px 8px 8px;border:2px dashed #ffffff1c;border-radius:14px;background:#0000001a}
 .drop-valid{border-color:var(--green)!important;background:#3ddc8426!important}
@@ -1056,9 +1056,9 @@ document.addEventListener('pointermove',e=>{
   const yPos = e.clientY;
   const threshold = 60;
   if (yPos < rect.top + threshold) {
-   tw.scrollTop -= 12; // Rola para cima mais rápido
+   tw.scrollTop -= 12;
   } else if (yPos > rect.bottom - threshold) {
-   tw.scrollTop += 12; // Rola para baixo
+   tw.scrollTop += 12;
   }
  }
 });
