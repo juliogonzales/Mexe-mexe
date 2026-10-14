@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#071b10">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" href="manifest.json">
 <title>Mexe-Mexe</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/mqtt@4.3.7/dist/mqtt.min.js';document.head.appendChild(s)"></script>
 <style>
@@ -17,9 +16,9 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 input,select{user-select:text;-webkit-user-select:text;-webkit-touch-callout:default}
-html{background:#030c07;overscroll-behavior:none;overscroll-behavior-y:none}
+html{background:#030c07;overscroll-behavior:none;overscroll-behavior-y:none;touch-action:none}
 body{height:100vh;height:100dvh;max-width:860px;margin:0 auto;overflow:hidden;display:flex;flex-direction:column;background:var(--bg);color:var(--text);
- font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overscroll-behavior:none;overscroll-behavior-y:none;padding-top:var(--safe-t)}
+ font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overscroll-behavior:none;overscroll-behavior-y:none;padding-top:var(--safe-t);touch-action:none}
 button{font-family:inherit}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
@@ -47,7 +46,7 @@ header{display:flex;align-items:center;gap:8px;padding:7px 10px;background:linea
 .bot strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.72rem}
 .bot .cnt{color:var(--muted)}
 .bot small{display:block;color:#ffffff88;font-size:.6rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:.75rem}
-.table-wrap{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 8px 8px;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain}
+.table-wrap{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 8px 8px;-webkit-overflow-scrolling:touch;touch-action:none;overscroll-behavior:contain}
 .table-title{text-align:center;font-size:.64rem;letter-spacing:.8px;color:var(--muted);margin:2px 0 6px}
 .table-area{min-height:calc(100% - 22px);display:flex;align-content:flex-start;align-items:flex-start;gap:16px 8px;flex-wrap:wrap;padding:14px 8px 8px;border:2px dashed #ffffff1c;border-radius:14px;background:#0000001a}
 .drop-valid{border-color:var(--green)!important;background:#3ddc8426!important}
@@ -77,7 +76,7 @@ header{display:flex;align-items:center;gap:8px;padding:7px 10px;background:linea
 .card.dragging{opacity:.3}
 .card.fresh{animation:fresh 1s ease-out 3;box-shadow:0 0 0 2px #4cc9f0,0 0 12px #4cc9f0}
 @keyframes fresh{50%{transform:scale(1.12)}}
-.card.drawing{animation:drawAnim .4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;z-index:50}
+.card.drawing{animation:drawAnim .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);z-index:50}
 @keyframes drawAnim{0%{transform:translate(-120px,-160px) scale(0.4) rotate(-20deg);opacity:0}100%{transform:translate(0,0) scale(1) rotate(0deg);opacity:1}}
 .card.hint{border-color:var(--gold);z-index:2;animation:glow .9s ease-in-out infinite alternate}
 .meld.hint{border-color:var(--gold)!important;animation:glowbox .9s ease-in-out infinite alternate}
@@ -93,7 +92,7 @@ header{display:flex;align-items:center;gap:8px;padding:7px 10px;background:linea
 @keyframes pulse{50%{transform:scale(1.06)}}
 .player-area{padding:6px 8px calc(6px + var(--safe-b));background:linear-gradient(#071a0f,#04100a);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:5px}
 .hand-label{display:flex;justify-content:space-between;gap:6px;font-size:.66rem;color:var(--muted)}
-.hand{display:flex;align-items:center;gap:4px;overflow-x:auto;overflow-y:hidden;min-height:calc(var(--ch) + 22px);padding:12px 4px 6px;border:2px dashed transparent;border-radius:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.hand{touch-action:pan-x;overscroll-behavior:contain;display:flex;align-items:center;gap:4px;overflow-x:auto;overflow-y:hidden;min-height:calc(var(--ch) + 22px);padding:12px 4px 6px;border:2px dashed transparent;border-radius:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .hand::-webkit-scrollbar{display:none}
 .status{text-align:center;font-size:.7rem;line-height:1.3;color:#ffffffd0;min-height:27px}
 .action-bar{display:grid;grid-template-columns:repeat(5,auto);justify-content:center;gap:5px}
@@ -115,7 +114,7 @@ footer{text-align:center;padding:3px 4px calc(3px + var(--safe-b));font-size:.62
 .modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:14px;background:#000000d0;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:fade .2s}
 .modal.hidden{display:none!important}
 @keyframes fade{from{opacity:0}}
-.modal-box{width:100%;max-width:410px;max-height:94vh;overflow:auto;padding:20px 18px;background:linear-gradient(#18472b,#0f3220);border:2px solid var(--gold2);border-radius:18px;text-align:center;box-shadow:0 18px 50px #000a;animation:pop .22s cubic-bezier(.2,1.3,.4,1)}
+.modal-box{touch-action:none;overscroll-behavior:contain;width:100%;max-width:410px;max-height:94vh;overflow:auto;padding:20px 18px;background:linear-gradient(#18472b,#0f3220);border:2px solid var(--gold2);border-radius:18px;text-align:center;box-shadow:0 18px 50px #000a;animation:pop .22s cubic-bezier(.2,1.3,.4,1)}
 @keyframes pop{from{transform:scale(.92);opacity:0}}
 .modal h2{color:var(--gold);margin-bottom:10px;font-size:1.35rem}
 .modal p{font-size:.86rem;line-height:1.45;white-space:pre-line;margin-bottom:10px;color:#e6efe9}
@@ -212,7 +211,7 @@ summary{cursor:pointer;color:var(--gold);font-weight:700;padding:6px 0}
   <li><b>Sequência:</b> 3 ou mais cartas do mesmo naipe em ordem. O Ás vale A-2-3 ou Q-K-A.</li>
   <li>Na sua vez, baixe combinações, acrescente cartas e reorganize a mesa. No fim, toda combinação precisa estar válida (borda verde).</li>
   <li>Sem jogada? <b>Compre 1 carta e passe a vez.</b></li>
-  <li>Se o monte acabar e ninguém jogar, vence quem tiver menos pontos: Ás 15, J/Q/K 10, as demais pelo valor.</li>
+  <li>Quando alguém comprar a <b>última carta do monte</b>, a rodada termina e vence quem tiver <b>menos pontos</b> na mão: Ás 15, J/Q/K 10, as demais pelo valor.</li>
   <li>Cartas com contorno azul foram baixadas na última jogada.</li>
  </ul>
  <button class="wide" onclick="hide('rules-modal')">Entendi</button>
@@ -245,7 +244,7 @@ summary{cursor:pointer;color:var(--gold);font-weight:700;padding:6px 0}
 /* ================= Constantes e utilidades ================= */
 const SUITS=['copas','ouros','paus','espadas'];
 const VALUES=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
-const SYMBOL={copas:'♥',ouros:'♦',paus:'♣',espadas:'♠'};
+const SYMBOL={copas:'♥\uFE0E',ouros:'♦\uFE0E',paus:'♣\uFE0E',espadas:'♠\uFE0E'};
 const BROKER='wss://broker.hivemq.com:8884/mqtt';
 const CODE_CHARS='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const GRACE_MS=120000;
@@ -264,7 +263,7 @@ const handPoints=h=>h.reduce((s,c)=>s+scoreValue(c.val),0);
 const T=s=>'mexe/'+roomCode+'/'+s;
 
 const state={name:lsGet('mm_name',''),mode:null,view:null,edit:null,selected:[],hint:null,buyWarn:false,fresh:new Set(),
- sortMode:'value',lastDrag:0,overDone:false,waiting:false,lastGame:null,lastSeq:-1,sound:lsGet('mm_sound','1')==='1',waitTimer:null,joined:false,botCount:3,gameDiff:'medium'};
+ sortMode:'value',lastDrag:0,overDone:false,waiting:false,lastGame:0,lastSeq:-1,sound:lsGet('mm_sound','1')==='1',waitTimer:null,joined:false,botCount:3,gameDiff:'medium'};
 let G=null,client=null,roomCode='',guests=[],lobbyLocked=false,myId=lsGet('mm_gid','');
 if(!myId){myId=rid()+rid();lsSet('mm_gid',myId)}
 let drag=null;
@@ -350,7 +349,7 @@ document.addEventListener('visibilitychange',()=>{
 function toMenu(){
  cleanupAll();
  state.mode=null;state.view=null;state.edit=null;state.selected=[];state.hint=null;state.buyWarn=false;state.waiting=false;state.overDone=false;state.joined=false;
- state.lastGame=null;state.lastSeq=-1;state.fresh=new Set();
+ state.lastGame=0;state.lastSeq=-1;state.fresh=new Set();
  ['host-modal','join-modal','over-modal','msg-modal','rules-modal'].forEach(hide);show('menu-modal');
  $('nameIn').value=state.name;$('sndBtn').textContent=state.sound?'🔊':'🔇';render();setStatus('');
 }
@@ -582,12 +581,14 @@ function buildRoster(){
  }
  return roster;
 }
+let lastGameNo=0;
 function startGameWith(roster){
  if(G){clearTimeout(G.botTimer);G.players.forEach(p=>clearTimeout(p.leaveTimer))}
- G={id:rid(),seq:0,deck:createDeck(),players:roster.map(r=>({...r,hand:[],last:'',away:false})),table:[],turn:0,over:false,passes:0,result:null,botTimer:null};
+ lastGameNo=Math.max(Date.now(),lastGameNo+1);
+ G={id:rid(),no:lastGameNo,seq:0,deck:createDeck(),players:roster.map(r=>({...r,hand:[],last:'',away:false})),table:[],turn:0,over:false,result:null,botTimer:null};
  for(const p of G.players){p.hand=G.deck.splice(0,11);sortCards(p.hand,'value')}
  ['menu-modal','host-modal','join-modal','over-modal','msg-modal'].forEach(hide);
- state.fresh=new Set();state.lastGame=null;
+ state.fresh=new Set();state.lastGame=0;
  keepAwake();pushViews(true);scheduleBot();
 }
 function startSolo(){
@@ -609,7 +610,7 @@ function playAgain(){
 function viewFor(seat){
  const p=G.players[seat];
  const topCard = G.deck.length > 0 ? G.deck[G.deck.length - 1].id : null;
- return {game:G.id,seq:G.seq,me:seat,
+ return {game:G.no,seq:G.seq,me:seat,
   players:G.players.map(x=>({name:x.name,count:x.hand.length,last:x.last,bot:x.kind==='bot',away:!!x.away})),
   table:G.table.map(g=>g.map(c=>c.id)),deck:G.deck.length,topCard,turn:G.turn,over:G.over?overFor(seat):null,hand:p.hand.map(c=>c.id)};
 }
@@ -637,7 +638,7 @@ function overFor(seat){
  const best=r.ranked[0].score;
  const won=r.ranked.some(x=>x.seat===seat&&x.score===best);
  return {won,title:won?'Você venceu!':'Monte esgotado',
-  text:'O monte acabou e ninguém consegue jogar. Vence quem tiver menos pontos.\n\n'+r.ranked.map((x,i)=>`${i+1}. ${G.players[x.seat].name}: ${x.score} pontos`).join('\n')};
+  text:'O monte acabou. Vence quem tiver menos pontos na mão.\n\n'+r.ranked.map((x,i)=>`${i+1}. ${G.players[x.seat].name}: ${x.score} pontos`).join('\n')};
 }
 function advance(){
  if(G.over)return;
@@ -654,7 +655,7 @@ function endByDeck(){
  G.result={kind:'deck',ranked:G.players.map((p,i)=>({seat:i,score:handPoints(p.hand)})).sort((a,b)=>a.score-b.score)};
  pushViews();
 }
-function deckStuck(){if(G.deck.length===0&&G.passes>=G.players.length){endByDeck();return true}return false}
+function afterDraw(){if(G.deck.length===0){endByDeck();return true}return false}
 
 function hostMove(seat,tableIds,handIds){
  const bad={ok:false,msg:'Jogada inválida.'};
@@ -671,13 +672,13 @@ function hostMove(seat,tableIds,handIds){
  if(handIds.length>=p.hand.length)return {ok:false,msg:'Baixe pelo menos uma carta da mão.'};
  G.table=newTable.map(displayMeld);
  p.hand=handIds.map(cardFromId);sortCards(p.hand,'value');
- p.last='baixou cartas';G.passes=0;
+ p.last='baixou cartas';
  if(p.hand.length===0){finishWin(seat);return {ok:true}}
  advance();return {ok:true};
 }
 function hostBuy(seat){
  if(!G||G.over||G.turn!==seat)return false;
- const p=G.players[seat];G.passes++;
+ const p=G.players[seat];
  if(G.deck.length){
   const drawn=G.deck.pop();
   p.hand.push(drawn);
@@ -690,7 +691,7 @@ function hostBuy(seat){
    },50);
   }
  }else p.last='passou';
- if(deckStuck())return true;
+ if(afterDraw())return true;
  advance();return true;
 }
 
@@ -733,25 +734,24 @@ function botTurn(){
  const seat=G.turn,p=G.players[seat];if(!p||p.kind!=='bot')return;
  let plays=0;const max=p.diff==='easy'?1:99;
  if(!(p.diff==='easy'&&Math.random()<0.25)){while(plays<max&&p.hand.length&&botStep(p))plays++}
- if(plays){p.last=`baixou ${plays} jogada${plays>1?'s':''}`;G.passes=0}
+ if(plays){p.last=`baixou ${plays} jogada${plays>1?'s':''}`}
  else{
-  G.passes++;
   if(G.deck.length){p.hand.push(G.deck.pop());sortCards(p.hand,'value');p.last='comprou 1 carta'}else p.last='passou';
  }
  if(p.hand.length===0){finishWin(seat);return}
- if(deckStuck())return;
+ if(!plays&&afterDraw())return;
  advance();
 }
 
 /* ================= Cliente: recebe a visão e desenha ================= */
 function applyView(v){
  if(!v||!Array.isArray(v.table)||!Array.isArray(v.hand)||!Array.isArray(v.players))return;
- if(v.game!==state.lastGame){state.lastGame=v.game;state.lastSeq=-1;state.fresh=new Set()}
- if(typeof v.seq==='number'){
-  if(v.seq<state.lastSeq&&!v.force)return;
-  if(v.seq===state.lastSeq&&!v.force)return;
-  state.lastSeq=Math.max(state.lastSeq,v.seq);
- }
+ if(typeof v.game!=='number'||typeof v.seq!=='number')return;
+ if(v.game<state.lastGame)return;
+ if(v.game>state.lastGame){state.lastGame=v.game;state.lastSeq=-1;state.fresh=new Set()}
+ if(v.seq<state.lastSeq)return;
+ if(v.seq===state.lastSeq&&!v.force)return;
+ state.lastSeq=v.seq;
  const prev=state.view;
  const view={...v,table:v.table.map(g=>g.map(cardFromId)),hand:v.hand.map(cardFromId)};
  sortHand(view.hand);
@@ -1072,7 +1072,44 @@ document.addEventListener('pointerup',e=>{
  if(t)applyDrop(d,t.target);
 });
 document.addEventListener('pointercancel',e=>{if(drag&&e.pointerId===drag.pid)endDrag()});
-document.addEventListener('touchmove',e=>{if(drag&&drag.active)e.preventDefault()},{passive:false});
+
+/* ---------- rolagem por toque (evita "puxar para atualizar" no WebView/APK) ---------- */
+(function(){
+ let t=null,raf=0;
+ const SC='#tableWrap,.modal-box';
+ const stop=()=>{if(raf){cancelAnimationFrame(raf);raf=0}};
+ document.addEventListener('touchstart',e=>{
+  stop();
+  if(e.touches.length!==1){t=null;return}
+  const tg=e.target,T=e.touches[0];
+  t={sc:tg.closest?tg.closest(SC):null,hand:!!(tg.closest&&tg.closest('.hand')),x:T.clientX,y:T.clientY,ly:T.clientY,lt:performance.now(),v:0,dir:null};
+ },{passive:true});
+ document.addEventListener('touchmove',e=>{
+  if(!t)return;
+  const tg=e.target;
+  if(tg.closest&&tg.closest('input,select,textarea'))return;
+  const T=e.touches[0],dx=T.clientX-t.x,dy=T.clientY-t.y;
+  if(!t.dir&&Math.hypot(dx,dy)>6)t.dir=Math.abs(dx)>Math.abs(dy)?'x':'y';
+  if(t.hand&&t.dir!=='y')return;       /* rolagem horizontal da mão continua nativa */
+  if(e.cancelable)e.preventDefault();   /* bloqueia o "puxar para atualizar" */
+  if(drag&&drag.active){t.ly=T.clientY;return}
+  if(t.sc&&t.dir==='y'){
+   const now=performance.now(),d=T.clientY-t.ly,dt=Math.max(1,now-t.lt);
+   t.sc.scrollTop-=d;
+   t.v=0.8*(-d/dt)+0.2*t.v;t.ly=T.clientY;t.lt=now;
+  }
+ },{passive:false});
+ const end=()=>{
+  if(!t)return;
+  const sc=t.sc;let v=t.v*16;const idle=performance.now()-t.lt;t=null;
+  if(!sc||idle>80||Math.abs(v)<1)return;
+  const step=()=>{sc.scrollTop+=v;v*=0.95;if(Math.abs(v)>0.4)raf=requestAnimationFrame(step);else raf=0};
+  raf=requestAnimationFrame(step);
+ };
+ document.addEventListener('touchend',end,{passive:true});
+ document.addEventListener('touchcancel',()=>{t=null},{passive:true});
+})();
+
 document.addEventListener('dragstart',e=>e.preventDefault());
 
 /* ---------- início ---------- */
